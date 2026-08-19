@@ -27,6 +27,9 @@ export function Navbar() {
     isConnected,
     networkName,
     refreshBalances,
+    ethBalance,
+    dETHBalance,
+    sETHBalance,
   } = useWeb3()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -181,7 +184,23 @@ export function Navbar() {
                           {account ? `${account.substring(0, 6)}...${account.substring(account.length - 4)}` : ""}
                         </div>
 
-                      
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-sm font-medium text-lightblue-700">Balances</span>
+                        </div>
+                        <div className="bg-lightblue-50 p-2 rounded-md text-sm space-y-1.5">
+                          <div className="flex justify-between">
+                            <span className="text-lightblue-700">ETH</span>
+                            <span className="font-medium text-lightblue-950">{formatBalance(ethBalance)}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-lightblue-700">dETH</span>
+                            <span className="font-medium text-lightblue-950">{formatBalance(dETHBalance)}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-lightblue-700">sETH</span>
+                            <span className="font-medium text-lightblue-950">{formatBalance(sETHBalance)}</span>
+                          </div>
+                        </div>
                       </div>
 
                       <DropdownMenuSeparator />
@@ -224,6 +243,20 @@ export function Navbar() {
                   <DropdownMenuContent align="end" className="w-56">
                     <DropdownMenuLabel>Wallet Balances</DropdownMenuLabel>
                     <DropdownMenuSeparator />
+                    <div className="px-2 py-1.5 text-sm space-y-1">
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">ETH</span>
+                        <span className="font-medium">{formatBalance(ethBalance)}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">dETH</span>
+                        <span className="font-medium">{formatBalance(dETHBalance)}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">sETH</span>
+                        <span className="font-medium">{formatBalance(sETHBalance)}</span>
+                      </div>
+                    </div>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={disconnectWallet} className="cursor-pointer text-red-500">
                       <LogOut className="mr-2 h-4 w-4" />
